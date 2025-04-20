@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Recommender</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="text"],
+      select {
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      ul {
+        margin-top: 20px;
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      li {
+        padding: 8px;
+        background: #ffffff;
+        border-radius: 6px;
+        margin: 5px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h2><i class="fas fa-film"></i> Movie Recommender System</h2>
+    <form method="POST">
+      <input
+        list="movie-list"
+        name="movie"
+        placeholder="Start typing a movie title..."
+        required
+      />
+      <datalist id="movie-list">
+        {% for movie in movies %}
+        <option value="{{ movie }}">{% endfor %}</option>
+      </datalist>
+
+      <button type="submit">🎬 Recommend</button>
+    </form>
+
+    {% if recommendations %}
+    <h3>Top Recommendations:</h3>
+    <ul>
+      {% for rec in recommendations %}
+      <li>{{ rec }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </body>
+</html>
